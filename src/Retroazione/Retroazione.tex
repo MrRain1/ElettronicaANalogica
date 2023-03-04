@@ -1,0 +1,82 @@
+\documentclass[a4paper, 12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[italian]{babel}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \LARGE{La Retroazione}
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\chapter{Retroazione}
+Il metodo della retroazione consente di avere amplificatori che funzionano in maniera più indipendente 
+dalle variazioni esterne al sistema (come temperatura e processi tecnologici) \textbf{migliorandone la stabilità}.
+\\Parte dell'uscita viene riportata in ingresso e sottratta.
+
+\begin{equation*}
+    A^{CC} = \frac{A^{CA}}{1+A^{CA}\beta}
+\end{equation*}
+
+dove $A^{CA}\beta$ è detto \textbf{guadagno d'anello}, mentre $1+A^{CA}\beta$ è detto \textbf{fattore di controreazione}.
+Riduco il guadagno $A^{CA}$ a ciclo aperto di un fattore pari al fattore di controreazione e per poter approssimare il guadagno a ciclo
+chiuso in modo che dipenda solo da $\beta$ deve essere $A^{CA}\beta\gg1$ in modo che $A^{CC}\approx\frac{1}{\beta}$.
+\\\\In tal caso l'aleatorietà dovuta al sistema A viene eliminata a discapito del guadagno stesso. Ottegno miglioramenti in termini di stabilità,
+impedenza d'ingresso/uscita, banda passante e riduco le distorsioni non lineari.
+\\\\Le ipotesi necessarie per un corretto funzionamento della retroazione sono:
+
+\begin{enumerate}
+    \item Le caratteristiche dell'amplificatore non sono infulenzate da $\beta$ e dal carico;
+    \item Le caratteristiche di ingresso dell'amplificatore A e di uscita della rete $\beta$, non sono modificate dal nodo sottrattore;
+    \item I segnali fluiscono da sinistra a destra per A e da destra a sinistra per $\beta$ \textbf{(unidirezionalità)}.
+\end{enumerate}
+Se queste condizioni sono verificate riusciamo ad ottenere caratteristiche del tipo $A^{CC} = \frac{A^{CA}}{1+A^{CA}\beta}$ e abbiamo il miglioramento di alcuni parametri dell'amplificatore.
+\\I miglioramenti ottenuti dalla retroazione negativa a spese del guadagno sono:
+\begin{enumerate}
+    \item \textbf{Stabilità del guadagno}: la retroazione riduce la stabilità del guadagno alle variazioni dei valori e dei parametri del transistor e degli elementi del circuito.
+    \item \textbf{Impdenza d'ingresso-uscita}: la retroazione può aumentare o diminuire la $R_{IN}$ e $R_{OUT}$ di un amplificatore;
+    \item \textbf{Banda passante}: la banda di un amplificatore può essere ampliata mediante la retroazione;
+    \item \textbf{Distorsione non lineare}: riduce gli effetti di distorsione non lineare.
+\end{enumerate}
+
+\section*{Distorsione}
+Un determinato amplificatore risulta lineare solo per un preciso range della tensione d'ingresso; la retroazione linearizza la caratteristica se $A\beta\gg1$.
+
+\section*{Stabilizzazione del guadagno}
+$\frac{dA}{A}$ è una quantità che indica quanto è l'effetto delle variazioni dei processi tecnologici e della temperatura sul guadagno totale.
+\\Essendo $A^{CC} = \frac{A}{1+A\beta}$ allora:
+\begin{equation*}
+    dA^{CC}=\frac{dA}{(1+A\beta)^2}
+\end{equation*}
+
+\begin{equation*}
+    \frac{dA^{CC}}{A^{CC}}=\frac{1}{(1+A\beta)}\frac{dA}{A}
+\end{equation*}
+
+\begin{equation*}
+    \frac{dA}{A}\gg\frac{dA^{CC}}{A^{CC}}
+\end{equation*}
+\textbf{Una variazione del guadagno a ciclo chiuso è minore di una variazione di A di un fattore $1+A\beta$.}
+
+\section*{Reiezione di banda}
+Ipotizziamo di avere un guadagno a ciclo aperto del tipo $A(s)= A_{0}\frac{s}{s+\omega_{L}}\frac{1}{1+\frac{s}{\omega_{H}}}$ che è band-pass.
+\\Inserendo l'amplificatore in una rete di retroazione si ha:
+\begin{equation*}
+    A^{CC}=\frac{A(s)}{1+A(s)\beta}=\frac{\frac{A_{0}s\omega_{H}}{(s+\omega_{L})(s+\omega_{H})}}{1+\frac{A_{0}s\omega_{H}}{(s+\omega_{L})(s+\omega_{H})}}=
+    \frac{A_{0}s\omega_{H}}{s^2+s(\omega_{L}+\omega_{H}+A_{0}\beta\omega_{H})+\omega_{H}\omega_{L}}
+\end{equation*}
+È diventata una funzione del 2° ordine.
+\\Il polo maggiore $\omega_{H}$ si può approssimare:
+\begin{equation*}
+    \omega_{H}'\cong\omega_{L}+\omega_{H}(1+A_{0}\beta)\approx\omega_{H}(1+A_{0}\beta)
+\end{equation*}
+
+
+\end{document}
